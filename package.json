@@ -1,0 +1,24 @@
+{
+  "name": "extract-json-from-string-y",
+  "version": "1.0.0",
+  "description": "extract json from string",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node index.test.js"
+  },
+  "keywords": [
+    "json",
+    "extract"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:yuanliwei/extract-json-from-string.git"
+  },
+  "homepage": "https://github.com/yuanliwei/extract-json-from-string",
+  "author": "yuanliwei",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.5.8"
+  }
+}
