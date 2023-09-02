@@ -151,6 +151,9 @@ function extractJsonValue(string, start) {
     if ('1234567890'.includes(begin)) {
         return extractNumber(string, start)
     }
+    if ('tfn'.includes(begin)) {
+        return extractBooleanOrNull(string, start)
+    }
     return -1
 }
 
@@ -188,6 +191,23 @@ function extractNumber(string, start) {
         }
     }
     return string.length
+}
+
+/**
+ * @param {string} string 
+ * @param {number} start 
+ */
+function extractBooleanOrNull(string, start) {
+    if ('true' === string.substring(start, start + 4)) {
+        return start + 4
+    }
+    if ('false' === string.substring(start, start + 5)) {
+        return start + 5
+    }
+    if ('null' === string.substring(start, start + 4)) {
+        return start + 4
+    }
+    return -1
 }
 
 /**

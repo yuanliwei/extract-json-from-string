@@ -168,5 +168,17 @@ await test('extractJsonFromString', { skip: false }, async (t) => {
 
     })
 
+    await t.test('should handle special characters in the string and JSON objects', () => {
+
+        const str = 'This is a test string with {"ok":true, "notok":  false,} {"mobile": null, "age": 30,  } and {"name": "Jane", "age": 25, "description": "\\"Special\\" characters: \\"%$#@!^&*(){}[]\\""} JSON objects.'
+        const expected = [
+            { "ok": true, "notok": false },
+            { "mobile": null, "age": 30, },
+            { "name": "Jane", "age": 25, "description": '"Special" characters: "%$#@!^&*(){}[]"' }
+        ]
+        deepEqual(extractJsonFromString(str), expected)
+
+    })
+
 })
 

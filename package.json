@@ -1,6 +1,6 @@
 {
   "name": "extract-json-from-string-y",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "extract json from string",
   "main": "index.js",
   "type": "module",
