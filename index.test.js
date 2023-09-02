@@ -3,7 +3,7 @@ import { equal, deepEqual } from "node:assert"
 
 import { extractJsonFromString } from './index.js'
 
-await test('extractJsonFromString', async (t) => {
+await test('extractJsonFromString', { skip: false }, async (t) => {
     await t.test('应该返回一个空数组，当输入字符串中没有 JSON', () => {
         const inputString = 'This is not a JSON'
         const expectedOutput = []
@@ -39,7 +39,7 @@ await test('extractJsonFromString', async (t) => {
 })
 
 
-await test('extractJsonFromString', async (t) => {
+await test('extractJsonFromString', { skip: false }, async (t) => {
     await t.test('should return an empty array if no JSON is found', () => {
         const str = 'This is a test string without any JSON'
         const result = extractJsonFromString(str)
@@ -88,7 +88,7 @@ await test('extractJsonFromString', async (t) => {
     })
 })
 
-await test('extractJsonFromString should return an array of extracted JSON objects', async (t) => {
+await test('extractJsonFromString should return an array of extracted JSON objects', { skip: false }, async (t) => {
     // 包含一个JSON对象
     deepEqual(extractJsonFromString('{ "name": "John", "age": 25 }'), [{ "name": "John", "age": 25 }])
 
@@ -118,7 +118,7 @@ await test('extractJsonFromString should return an array of extracted JSON objec
     deepEqual(extractJsonFromString('Hello World'), [])
 })
 
-await test('extractJsonFromString', async (t) => {
+await test('extractJsonFromString', { skip: false }, async (t) => {
     await t.test('should return an array of extracted JSON objects from a given string', () => {
         const str = 'This is a test string with {"name": "John", "age": 30} and {"name": "Jane", "age": 25} JSON objects.'
         const expected = [
@@ -148,4 +148,25 @@ await test('extractJsonFromString', async (t) => {
         deepEqual(extractJsonFromString(str), expected)
     })
 
+    await t.test('should handle special characters in the string and JSON objects', () => {
+
+        const str = 'This is a test string with {"na m\ne": "John", "age": 30, "description": "Special chara}cters: \\"%$#@!^&*()\\", \\"{Key}\\""} and {"name": "Jane", "age": 25, "description": "\\"Special\\" characters: \\"%$#@!^&*(){}[]\\""} JSON objects.'
+        const expected = [
+            { "name": "Jane", "age": 25, "description": '"Special" characters: "%$#@!^&*(){}[]"' }
+        ]
+        deepEqual(extractJsonFromString(str), expected)
+
+    })
+
+    await t.test('should handle special characters in the string and JSON objects', () => {
+
+        const str = 'This is a test string with {"na me": "Jo\nhn", "age": 30, "description": "Special chara}cters: \\"%$#@!^&*()\\", \\"{Key}\\""} and {"name": "Jane", "age": 25, "description": "\\"Special\\" characters: \\"%$#@!^&*(){}[]\\""} JSON objects.'
+        const expected = [
+            { "name": "Jane", "age": 25, "description": '"Special" characters: "%$#@!^&*(){}[]"' }
+        ]
+        deepEqual(extractJsonFromString(str), expected)
+
+    })
+
 })
+

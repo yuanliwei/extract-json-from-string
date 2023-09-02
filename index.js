@@ -117,6 +117,9 @@ function extractJsonKey(string, start) {
             i += 1
             continue
         }
+        if (/[\n\r\t]/.test(c)) {
+            return -1
+        }
         if (quotation) {
             if (c == begin) {
                 return i + 1
@@ -165,6 +168,9 @@ function extractString(string, start) {
         if (c == '\\') {
             i += 1
             continue
+        }
+        if (/[\n\r\t]/.test(c)) {
+            return -1
         }
     }
     return -1
