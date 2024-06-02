@@ -182,3 +182,11 @@ await test('extractJsonFromString', { skip: false }, async (t) => {
 
 })
 
+test('extract json 1', async () => {
+    // node --test-name-pattern="^extract json 1$" index.test.js
+    const str = `This is a test string with {ok:true, 'notok':  false,}`
+    const expected = [
+        { "ok": true, "notok": false },
+    ]
+    deepEqual(extractJsonFromString(str), expected)
+})
