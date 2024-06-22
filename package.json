@@ -1,12 +1,13 @@
 {
   "name": "extract-json-from-string-y",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "extract json from string",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "node index.test.js"
   },
+  "types": "types.d.ts",
   "keywords": [
     "json",
     "extract"
